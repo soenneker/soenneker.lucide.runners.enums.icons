@@ -21,7 +21,7 @@ namespace Soenneker.Lucide.Runners.Enums.Icons.Utils;
 ///<inheritdoc cref="IFileOperationsUtil"/>
 public sealed class FileOperationsUtil : IFileOperationsUtil
 {
-    private static readonly HashSet<string> CSharpReservedWords = new(StringComparer.OrdinalIgnoreCase)
+    private static readonly HashSet<string> _cSharpReservedWords = new(StringComparer.OrdinalIgnoreCase)
     {
         "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue",
         "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally",
@@ -41,6 +41,8 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
     private readonly ISha3Util _sha3Util;
 
     private string? _newHash;
+
+    private const bool _overrideHash = true;
 
     public FileOperationsUtil(IFileUtil fileUtil, ILogger<FileOperationsUtil> logger, IGitUtil gitUtil, IDotnetUtil dotnetUtil,
         IDotnetNuGetUtil dotnetNuGetUtil, IDirectoryUtil directoryUtil, ISha3Util sha3Util)
@@ -131,7 +133,7 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
             string iconName = iconNames[i];
             string enumMemberName = CaseUtil.ToPascal(iconName);
 
-            if (CSharpReservedWords.Contains(enumMemberName))
+            if (_cSharpReservedWords.Contains(enumMemberName))
                 enumMemberName += "Icon";
 
             sb.Append("    ");
@@ -151,7 +153,7 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
     {
         List<string> iconNames = await GetIconNamesFromResources(resourceDirectory, cancellationToken);
         string combinedNames = string.Join("\n", iconNames);
-        _newHash = _sha3Util.HashString(combinedNames, true);
+        _newHash = _sha3Util.HashString(combinedNames);
 
         string? oldHash = await _fileUtil.TryRead(Path.Combine(enumsGitDirectory, "hash.txt"), true, cancellationToken);
 
@@ -161,7 +163,11 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
             return true;
         }
 
-        if (oldHash == _newHash)
+        if (_overrideHash)
+        {
+            _logger.LogWarning("Overriding hash check...");
+        }
+        else if (oldHash == _newHash)
         {
             _logger.LogInformation("Hashes are equal, no need to update, exiting...");
             return false;
