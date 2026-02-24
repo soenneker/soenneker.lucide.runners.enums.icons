@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Soenneker.Utils.PooledStringBuilders;
 using Microsoft.Extensions.Logging;
 using Soenneker.Git.Util.Abstract;
 using Soenneker.Lucide.Runners.Enums.Icons.Utils.Abstract;
@@ -122,13 +122,13 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
 
     private static string GenerateLucideIconEnum(List<string> iconNames)
     {
-        var sb = new StringBuilder();
+        using var sb = new PooledStringBuilder();
         sb.AppendLine("namespace Soenneker.Lucide.Enums.Icons;");
         sb.AppendLine();
         sb.AppendLine("public enum LucideIcon");
         sb.AppendLine("{");
 
-        for (int i = 0; i < iconNames.Count; i++)
+        for (var i = 0; i < iconNames.Count; i++)
         {
             string iconName = iconNames[i];
             string enumMemberName = CaseUtil.ToPascal(iconName);
