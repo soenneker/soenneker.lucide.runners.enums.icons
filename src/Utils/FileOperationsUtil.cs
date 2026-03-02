@@ -42,7 +42,7 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
 
     private string? _newHash;
 
-    private const bool _overrideHash = true;
+    private const bool _overrideHash = false;
 
     public FileOperationsUtil(IFileUtil fileUtil, ILogger<FileOperationsUtil> logger, IGitUtil gitUtil, IDotnetUtil dotnetUtil,
         IDotnetNuGetUtil dotnetNuGetUtil, IDirectoryUtil directoryUtil, ISha3Util sha3Util)
