@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Soenneker.Utils.PooledStringBuilders;
 using Microsoft.Extensions.Logging;
 using Soenneker.Git.Util.Abstract;
+using Soenneker.Hashing.Blake3;
 using Soenneker.Lucide.Runners.Enums.Icons.Utils.Abstract;
 using Soenneker.Utils.Case;
 using Soenneker.Utils.Directory.Abstract;
@@ -14,7 +15,6 @@ using Soenneker.Utils.Dotnet.Abstract;
 using Soenneker.Utils.Dotnet.NuGet.Abstract;
 using Soenneker.Utils.Environment;
 using Soenneker.Utils.File.Abstract;
-using Soenneker.Utils.SHA3.Abstract;
 
 namespace Soenneker.Lucide.Runners.Enums.Icons.Utils;
 
@@ -38,14 +38,13 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
     private readonly IDotnetNuGetUtil _dotnetNuGetUtil;
     private readonly IFileUtil _fileUtil;
     private readonly IDirectoryUtil _directoryUtil;
-    private readonly ISha3Util _sha3Util;
 
     private string? _newHash;
 
     private const bool _overrideHash = false;
 
     public FileOperationsUtil(IFileUtil fileUtil, ILogger<FileOperationsUtil> logger, IGitUtil gitUtil, IDotnetUtil dotnetUtil,
-        IDotnetNuGetUtil dotnetNuGetUtil, IDirectoryUtil directoryUtil, ISha3Util sha3Util)
+        IDotnetNuGetUtil dotnetNuGetUtil, IDirectoryUtil directoryUtil)
     {
         _fileUtil = fileUtil;
         _logger = logger;
@@ -53,7 +52,6 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
         _dotnetUtil = dotnetUtil;
         _dotnetNuGetUtil = dotnetNuGetUtil;
         _directoryUtil = directoryUtil;
-        _sha3Util = sha3Util;
     }
 
     public async ValueTask Process(CancellationToken cancellationToken)
@@ -153,7 +151,7 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
     {
         List<string> iconNames = await GetIconNamesFromResources(resourceDirectory, cancellationToken);
         string combinedNames = string.Join("\n", iconNames);
-        _newHash = _sha3Util.HashString(combinedNames);
+        _newHash = Blake3Hasher.HashToString(combinedNames);
 
         string? oldHash = await _fileUtil.TryRead(Path.Combine(enumsGitDirectory, "hash.txt"), true, cancellationToken);
 
