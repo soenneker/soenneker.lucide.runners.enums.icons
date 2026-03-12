@@ -4,10 +4,11 @@
   </Folder>
   <Folder Name="/.github/workflows/">
     <File Path=".github/workflows/build-and-test.yml" />
-    <File Path=".github/workflows/daily-automatic-update.yml" />
+    <File Path=".github/workflows/codeql.yml" />
+    <File Path=".github/workflows/publish-package.yml" />
   </Folder>
   <Folder Name="/src/">
-    <Project Path="src/Soenneker.Lucide.Runners.Enums.Icons.csproj" />
+    <Project Path="src/Soenneker.Lucide.Runners.Enums.Icons/Soenneker.Lucide.Runners.Enums.Icons.csproj" />
   </Folder>
   <Folder Name="/test/">
     <Project Path="test/Soenneker.Lucide.Runners.Enums.Icons.Tests/Soenneker.Lucide.Runners.Enums.Icons.Tests.csproj" />
