@@ -62,7 +62,7 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
         string enumsGitDirectory = await _gitUtil.CloneToTempDirectory($"https://github.com/soenneker/{Constants.EnumsIconsLibrary}",
             cancellationToken: cancellationToken);
 
-        string resourceDirectory = Path.Combine(iconsGitDirectory, "src", "Soenneker.Lucide.Enums.Icons", "Resources");
+        string resourceDirectory = Path.Combine(iconsGitDirectory, "src", "Soenneker.Lucide.Icons", "Resources");
 
         bool needToUpdate = await CheckForHashDifferences(enumsGitDirectory, resourceDirectory, cancellationToken);
 
