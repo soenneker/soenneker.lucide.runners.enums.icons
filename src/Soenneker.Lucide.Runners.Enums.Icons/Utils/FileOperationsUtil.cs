@@ -62,7 +62,7 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
         string enumsGitDirectory = await _gitUtil.CloneToTempDirectory($"https://github.com/soenneker/{Constants.EnumsIconsLibrary}",
             cancellationToken: cancellationToken);
 
-        string resourceDirectory = Path.Combine(iconsGitDirectory, "src", "Resources");
+        string resourceDirectory = Path.Combine(iconsGitDirectory, "src", "Soenneker.Lucide.Enums.Icons", "Resources");
 
         bool needToUpdate = await CheckForHashDifferences(enumsGitDirectory, resourceDirectory, cancellationToken);
 
@@ -85,7 +85,7 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
 
         _logger.LogInformation("Generated LucideIcon enum with {Count} icons", iconNames.Count);
 
-        string projFilePath = Path.Combine(enumsGitDirectory, "src", "Soenneker.Lucide.Enums.Icons.csproj");
+        string projFilePath = Path.Combine(enumsGitDirectory, "src", "Soenneker.Lucide.Enums.Icons", "Soenneker.Lucide.Enums.Icons.csproj");
 
         await _dotnetUtil.Restore(projFilePath, cancellationToken: cancellationToken);
 
