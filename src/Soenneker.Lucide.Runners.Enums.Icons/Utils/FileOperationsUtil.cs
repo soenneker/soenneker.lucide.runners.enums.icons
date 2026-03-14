@@ -78,7 +78,7 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
     {
         List<string> iconNames = await GetIconNamesFromResources(resourceDirectory, cancellationToken);
 
-        string lucideIconPath = Path.Combine(enumsGitDirectory, "src", "LucideIcon.cs");
+        string lucideIconPath = Path.Combine(enumsGitDirectory, "src", "Soenneker.Lucide.Enums.Icons", "LucideIcon.cs");
         string enumContent = GenerateLucideIconEnum(iconNames);
 
         await _fileUtil.Write(lucideIconPath, enumContent, true, cancellationToken);
