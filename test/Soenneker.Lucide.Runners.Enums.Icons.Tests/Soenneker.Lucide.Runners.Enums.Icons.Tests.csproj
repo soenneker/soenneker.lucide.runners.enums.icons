@@ -25,10 +25,5 @@
     <ItemGroup>
         <ProjectReference Include="..\..\src\Soenneker.Lucide.Runners.Enums.Icons\Soenneker.Lucide.Runners.Enums.Icons.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-        <Content Include="testconfig.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
-    </ItemGroup>
 </Project>
+
