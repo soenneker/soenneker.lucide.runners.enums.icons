@@ -5,10 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Soenneker.Managers.Runners.Abstract;
-using Soenneker.Utils.Directory.Abstract;
-using Soenneker.Utils.File.Abstract;
-using Soenneker.Utils.File.Download.Abstract;
 using Soenneker.Lucide.Runners.Enums.Icons.Utils.Abstract;
 
 namespace Soenneker.Lucide.Runners.Enums.Icons;
@@ -40,7 +36,7 @@ public sealed class ConsoleHostedService : IHostedService
 
                 try
                 {
-                    await _fileOperationsUtil.Process("init", cancellationToken);
+                    await _fileOperationsUtil.Process(cancellationToken);
 
                     _logger.LogInformation("Complete!");
 

@@ -1,10 +1,16 @@
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using Soenneker.Git.Util.Registrars;
 using Soenneker.TestHosts.Unit;
 using Soenneker.Utils.Test;
-using Soenneker.Lucide.Runners.Enums.Icons.Registrars;
+using Soenneker.Lucide.Runners.Enums.Icons.Utils;
+using Soenneker.Lucide.Runners.Enums.Icons.Utils.Abstract;
+using Soenneker.Utils.Directory.Registrars;
+using Soenneker.Utils.File.Registrars;
+using Soenneker.Utils.Process.Registrars;
 
 namespace Soenneker.Lucide.Runners.Enums.Icons.Tests;
 
@@ -24,9 +30,23 @@ public sealed class Host : UnitTestHost
             builder.AddSerilog(dispose: false);
         });
 
-        IConfiguration config = TestUtil.BuildConfig();
+        IConfiguration config = new ConfigurationBuilder()
+                                .AddConfiguration(TestUtil.BuildConfig())
+                                .AddInMemoryCollection(new Dictionary<string, string?>
+                                {
+                                    ["Git:Token"] = "test-token",
+                                    ["Git:Name"] = "Test User",
+                                    ["Git:Email"] = "test@example.com",
+                                    ["Git:DefaultBranch"] = "main",
+                                    ["Git:Log"] = "false"
+                                })
+                                .Build();
         services.AddSingleton(config);
 
-        services.AddLucideIconsEnumRunnerAsScoped();
+        services.AddSingleton<IFileOperationsUtil, FileOperationsUtil>()
+                .AddDirectoryUtilAsSingleton()
+                .AddFileUtilAsSingleton()
+                .AddGitUtilAsSingleton()
+                .AddProcessUtilAsSingleton();
     }
 }

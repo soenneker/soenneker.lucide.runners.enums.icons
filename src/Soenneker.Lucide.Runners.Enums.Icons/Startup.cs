@@ -2,8 +2,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Soenneker.Git.Util.Registrars;
 using Soenneker.Lucide.Runners.Enums.Icons.Utils;
 using Soenneker.Lucide.Runners.Enums.Icons.Utils.Abstract;
-using Soenneker.Managers.Runners.Registrars;
-using Soenneker.Utils.File.Download.Registrars;
+using Soenneker.Utils.Directory.Registrars;
+using Soenneker.Utils.File.Registrars;
+using Soenneker.Utils.Process.Registrars;
 
 namespace Soenneker.Lucide.Runners.Enums.Icons;
 
@@ -22,8 +23,10 @@ public static class Startup
     {
         services.AddHostedService<ConsoleHostedService>()
                 .AddSingleton<IFileOperationsUtil, FileOperationsUtil>()
-                .AddFileDownloadUtilAsSingleton()
-                .AddRunnersManagerAsSingleton();
+                .AddDirectoryUtilAsSingleton()
+                .AddFileUtilAsSingleton()
+                .AddGitUtilAsSingleton()
+                .AddProcessUtilAsSingleton();
 
         return services;
     }
