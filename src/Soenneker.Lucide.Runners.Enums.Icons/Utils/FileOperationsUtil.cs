@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Soenneker.Git.Util.Abstract;
+using Soenneker.Hashing.XxHash;
 using Soenneker.Lucide.Runners.Enums.Icons.Utils.Abstract;
 using Soenneker.Utils.Directory.Abstract;
 using Soenneker.Utils.Dotnet.Abstract;
@@ -18,6 +19,7 @@ namespace Soenneker.Lucide.Runners.Enums.Icons.Utils;
 ///<inheritdoc cref="IFileOperationsUtil"/>
 public sealed class FileOperationsUtil : IFileOperationsUtil
 {
+    private const string HashFileName = "hash.txt";
     private const string CSharpKeywordSuffix = "Icon";
 
     private static readonly HashSet<string> CSharpKeywords = new(StringComparer.Ordinal)
@@ -58,17 +60,20 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
             string upstreamCommit = (await _gitUtil.Run("rev-parse HEAD", upstreamDirectory, log: false, cancellationToken: cancellationToken))[0].Trim();
 
             string generatedEnum = await GenerateEnum(upstreamDirectory, cancellationToken);
+            string newHash = XxHash3Util.Hash(generatedEnum);
 
             string enumPath = Path.Combine(targetDirectory, "src", Constants.Library, Constants.EnumFileName);
-            string? existingEnum = await _fileUtil.TryRead(enumPath, cancellationToken: cancellationToken);
+            string hashPath = Path.Combine(targetDirectory, HashFileName);
+            string? existingHash = await _fileUtil.TryRead(hashPath, cancellationToken: cancellationToken);
 
-            if (StringComparer.Ordinal.Equals(existingEnum, generatedEnum))
+            if (StringComparer.Ordinal.Equals(existingHash?.Trim(), newHash))
             {
-                _logger.LogInformation("Lucide enum is already current at upstream commit {UpstreamCommit}", upstreamCommit);
+                _logger.LogInformation("Lucide enum hash is already current at upstream commit {UpstreamCommit}", upstreamCommit);
                 return;
             }
 
             await _fileUtil.Write(enumPath, generatedEnum, cancellationToken: cancellationToken);
+            await _fileUtil.Write(hashPath, newHash, cancellationToken: cancellationToken);
 
             string projectPath = Path.Combine(targetDirectory, "src", Constants.Library, $"{Constants.Library}.csproj");
 
