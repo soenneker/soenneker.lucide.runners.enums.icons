@@ -106,11 +106,19 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
         using var builder = new PooledStringBuilder();
         builder.Append("namespace Soenneker.Lucide.Enums.Icons;\n");
         builder.Append('\n');
+        builder.Append("/// <summary>\n");
+        builder.Append("/// Represents the lucide icon values.\n");
+        builder.Append("/// </summary>\n");
         builder.Append("public enum LucideIcon\n");
         builder.Append("{\n");
 
         for (var i = 0; i < enumMembers.Length; i++)
         {
+            builder.Append("    /// <summary>\n");
+            builder.Append("    /// Represents the ");
+            builder.Append(ToCommentValue(enumMembers[i]));
+            builder.Append(" value.\n");
+            builder.Append("    /// </summary>\n");
             builder.Append("    ");
             builder.Append(enumMembers[i]);
 
@@ -121,6 +129,29 @@ public sealed class FileOperationsUtil : IFileOperationsUtil
         }
 
         builder.Append("}\n");
+
+        return builder.ToString();
+    }
+
+    private static string ToCommentValue(string memberName)
+    {
+        using var builder = new PooledStringBuilder(memberName.Length * 2);
+
+        for (var i = 0; i < memberName.Length; i++)
+        {
+            char character = memberName[i];
+
+            if (i > 0 && char.IsUpper(character))
+            {
+                char previous = memberName[i - 1];
+                char? next = i + 1 < memberName.Length ? memberName[i + 1] : null;
+
+                if (char.IsLower(previous) || char.IsDigit(previous) || next.HasValue && char.IsLower(next.Value))
+                    builder.Append(' ');
+            }
+
+            builder.Append(char.ToLowerInvariant(character));
+        }
 
         return builder.ToString();
     }
