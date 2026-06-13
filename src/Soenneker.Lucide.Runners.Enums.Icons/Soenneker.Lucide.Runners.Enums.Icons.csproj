@@ -29,7 +29,7 @@
         <PackageReference Include="Soenneker.Utils.Dotnet" Version="4.0.2414" />
         <PackageReference Include="Soenneker.Utils.Dotnet.NuGet" Version="4.0.1997" />
         <PackageReference Include="Soenneker.Utils.Directory" Version="4.0.868" />
-        <PackageReference Include="Soenneker.Utils.File" Version="4.0.2174" />
+        <PackageReference Include="Soenneker.Utils.File" Version="4.0.2175" />
         <PackageReference Include="Soenneker.Utils.PooledStringBuilders" Version="4.0.22" />
     </ItemGroup>
 </Project>
