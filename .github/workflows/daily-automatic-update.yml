@@ -10,7 +10,6 @@ env:
   GIT__TOKEN: ${{ secrets.GIT__TOKEN }}
   GIT__NAME: ${{ secrets.GIT__NAME }}
   GIT__EMAIL: ${{ secrets.GIT__EMAIL }}
-  NUGET__TOKEN: ${{ secrets.NUGET__TOKEN }}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -23,11 +22,6 @@ jobs:
   
     steps:
       - uses: actions/checkout@v7.0.0
-
-      - name: Setting up build version
-        run: |
-          version=$(($GITHUB_RUN_NUMBER))
-          echo "BUILD_VERSION=4.0.$version" >> ${GITHUB_ENV}
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
