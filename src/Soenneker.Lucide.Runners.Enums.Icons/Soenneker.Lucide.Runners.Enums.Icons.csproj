@@ -22,10 +22,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Soenneker.Extensions.LoggerConfiguration" Version="4.0.1324" />
+        <PackageReference Include="Soenneker.Extensions.LoggerConfiguration" Version="4.0.1325" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.11" />
         <PackageReference Include="Soenneker.Hashing.XxHash" Version="4.0.77" />
         <PackageReference Include="Soenneker.Git.Util" Version="4.0.3663" />
-        <PackageReference Include="Soenneker.Utils.Dotnet" Version="4.0.2506" />
+        <PackageReference Include="Soenneker.Utils.Dotnet" Version="4.0.2509" />
 </ItemGroup>
 </Project>
