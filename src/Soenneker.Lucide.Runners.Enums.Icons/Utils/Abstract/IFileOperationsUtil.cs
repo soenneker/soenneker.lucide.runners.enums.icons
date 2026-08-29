@@ -9,9 +9,9 @@ namespace Soenneker.Lucide.Runners.Enums.Icons.Utils.Abstract;
 public interface IFileOperationsUtil
 {
     /// <summary>
-    /// Executes the process operation.
+    /// Processes the pending work managed by the file operations.
     /// </summary>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
+    /// <param name="cancellationToken">Token used to cancel the operation.</param>
+    /// <returns>A task that completes when the full processing workflow has finished.</returns>
     ValueTask Process(CancellationToken cancellationToken);
 }
