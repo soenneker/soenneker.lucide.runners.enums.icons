@@ -15,6 +15,7 @@ using Soenneker.Utils.PooledStringBuilders;
 
 namespace Soenneker.Lucide.Runners.Enums.Icons.Utils;
 
+/// <inheritdoc cref="IFileOperationsUtil" />
 public sealed class FileOperationsUtil : IFileOperationsUtil
 {
     private const string HashFileName = "hash.txt";
