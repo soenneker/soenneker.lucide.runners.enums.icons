@@ -25,7 +25,7 @@
         <PackageReference Include="Soenneker.Extensions.LoggerConfiguration" Version="4.0.1366" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.11" />
         <PackageReference Include="Soenneker.Hashing.XxHash" Version="4.0.89" />
-        <PackageReference Include="Soenneker.Git.Util" Version="4.0.3748" />
+        <PackageReference Include="Soenneker.Git.Util" Version="4.0.3749" />
         <PackageReference Include="Soenneker.Utils.Dotnet" Version="4.0.2566" />
 </ItemGroup>
 </Project>
