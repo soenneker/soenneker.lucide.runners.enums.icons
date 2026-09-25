@@ -29,6 +29,6 @@
         <PackageReference Include="Soenneker.Utils.Dotnet" Version="4.0.2600" />
 </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Soenneker.Extensions.ValueTask" Version="4.0.123" />
+        <PackageReference Include="Soenneker.Extensions.ValueTask" Version="4.0.124" />
     </ItemGroup>
 </Project>
