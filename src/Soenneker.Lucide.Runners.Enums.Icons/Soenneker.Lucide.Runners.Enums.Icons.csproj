@@ -27,7 +27,7 @@
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.12" />
         <PackageReference Include="Soenneker.Hashing.XxHash" Version="4.0.104" />
         <PackageReference Include="Soenneker.Git.Util" Version="4.0.3832" />
-        <PackageReference Include="Soenneker.Utils.Dotnet" Version="4.0.2617" />
+        <PackageReference Include="Soenneker.Utils.Dotnet" Version="4.0.2619" />
 </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Soenneker.Extensions.ValueTask" Version="4.0.124" />
