@@ -23,13 +23,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Soenneker.Extensions.LoggerConfiguration" Version="4.0.1418" />
+        <PackageReference Include="Soenneker.Extensions.LoggerConfiguration" Version="4.0.1419" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.12" />
-        <PackageReference Include="Soenneker.Hashing.XxHash" Version="4.0.106" />
+        <PackageReference Include="Soenneker.Hashing.XxHash" Version="4.0.107" />
         <PackageReference Include="Soenneker.Git.Util" Version="4.0.3838" />
-        <PackageReference Include="Soenneker.Utils.Dotnet" Version="4.0.2630" />
+        <PackageReference Include="Soenneker.Utils.Dotnet" Version="4.0.2632" />
 </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Soenneker.Extensions.ValueTask" Version="4.0.125" />
+        <PackageReference Include="Soenneker.Extensions.ValueTask" Version="4.0.126" />
     </ItemGroup>
 </Project>
