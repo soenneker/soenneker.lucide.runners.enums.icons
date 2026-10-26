@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net10.0</TargetFramework>
+        <TargetFramework>net11.0</TargetFramework>
         <IsAotCompatible>true</IsAotCompatible>
         <Nullable>enable</Nullable>
         <Platforms>AnyCPU</Platforms>
@@ -11,7 +11,7 @@
 
     <PropertyGroup>
         <Description>Automatically updates the Soenneker.Lucide.Enums.Icons package, daily</Description>
-        <Version Condition="'$(BUILD_VERSION)' == ''">4.0.0</Version>
+        <Version Condition="'$(BUILD_VERSION)' == ''">11.0.0</Version>
         <Version Condition="'$(BUILD_VERSION)' != ''">$(BUILD_VERSION)</Version>
         <AssemblyName>Soenneker.Lucide.Runners.Enums.Icons</AssemblyName>
         <Copyright>Copyright © 2026 Jake Soenneker</Copyright>
@@ -24,9 +24,9 @@
 
     <ItemGroup>
         <PackageReference Include="Soenneker.Extensions.LoggerConfiguration" Version="4.0.1442" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.14" />
-        <PackageReference Include="Soenneker.Hashing.XxHash" Version="4.0.121" />
-        <PackageReference Include="Soenneker.Git.Util" Version="4.0.3857" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="11.0.0-rc.3.26522.148" />
+        <PackageReference Include="Soenneker.Hashing.XxHash" Version="4.0.122" />
+        <PackageReference Include="Soenneker.Git.Util" Version="4.0.3858" />
         <PackageReference Include="Soenneker.Utils.Dotnet" Version="4.0.2656" />
 </ItemGroup>
     <ItemGroup>
