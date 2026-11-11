@@ -23,7 +23,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Soenneker.Extensions.LoggerConfiguration" Version="11.0.1462" />
+        <PackageReference Include="Soenneker.Extensions.LoggerConfiguration" Version="11.0.1464" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="11.0.0" />
         <PackageReference Include="Soenneker.Hashing.XxHash" Version="11.0.133" />
         <PackageReference Include="Soenneker.Git.Util" Version="11.0.3893" />
